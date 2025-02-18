@@ -37,4 +37,4 @@ def result():
         error=str(e)
         return render_template("index.html",e=error)
  
-app.run(host="localhost",port=5500,debug=True)
+# app.run(host="localhost",port=5500,debug=True)
