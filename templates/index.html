@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7S Attendance Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f2f5;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #1a73e8;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #5f6368;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #1a73e8;
+            box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #1557b0;
+        }
+
+
+
+        .github-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .github-link a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .percentage{
+            height: 42px;
+            font-size: 1rem;
+            border: 1px solid #eaeaea;
+            transition: all 0.3s ease;
+            background-color: transparent;
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+            padding: 0 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 2.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <form action="/home" method="post">
+        <div class="container">
+            <h1>7S Attendance Calculator</h1>
+            <p>Find out the number of days/lectures you can bunk while still maintaining 75% attendance 
+                or the number of days/lectures you should attend to attain 75% attendance.
+            </p><hr><br>
+
+            <div class="input-group">
+                <label for="Percentage Required" >Percentage Required</label>
+                
+                <select id="percentage" name="percentage" class="percentage">
+                    <option value="" disabled selected>Select Percentage Required</option>
+                    {% for percent in range(10, 101, 5) %}
+                        <option value="{{ percent }}" {% if percent == 75 %}selected{% endif %} name="percentage" >{{ percent }}%</option>
+                    {% endfor %}
+                </select>
+
+            </div>
+
+            <div class="input-group">
+                <label for="present">Current Present</label>
+                <input type="number" id="present" placeholder="Enter current present" name="present" required>
+            </div>
+
+            <div class="input-group">
+                <label for="total">Total Attendance</label>
+                <input type="number" id="total" placeholder="Enter total Attendance" name="total" required>
+            </div>
+
+            <button onclick="calculate()">Calculate</button><br><br>
+
+
+            <div class="error">{{ e }}</div>
+            <div class="result">
+                <p> {{ bunk }} </p>
+
+                <p> {{ current }}</p>
+
+                <p> {{ att_then }}</p>
+            </div>
+
+            <div class="github-link">
+                <a href="https://github.com/Sikanderjat/attendance_checker" target="github">View Source Code on GitHub</a>
+                <p>Developed by Lakhan and Sikander.</p>
+            </div>
+
+
+        </div>
+    </form>
+</body>
+
+</html>
