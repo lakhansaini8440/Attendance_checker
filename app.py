@@ -21,7 +21,7 @@ def result():
             rem_att = int((percentage * total - 100 * present) / (100 - percentage))
 
             x=total+rem_att
-            i=0
+            i=present 
             bunk=f"You can bunk for {day_to_bunk} more days/lectures."
             current=f"Current Attendance {current_attendence:.2f}"
             
