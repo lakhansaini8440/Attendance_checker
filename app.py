@@ -21,17 +21,20 @@ def result():
             rem_att = int((percentage * total - 100 * present) / (100 - percentage))
 
             x=total+rem_att
-            i=present+rem_att
+            i=0
             bunk=f"You can bunk for {day_to_bunk} more days/lectures."
             current=f"Current Attendance {current_attendence:.2f}"
-            att_then = f"Attendance then {i}/{x} = {(i/x)*100:.2f}%"
+            
             print(day_to_bunk,current_attendence,bunk)
  
 
             if day_to_bunk<0:
+                i=present+rem_att
                 bunk = rem_att
                 bunk=f"You need to attend {bunk:.2f} more classes to attain {percentage}% attendance"
+            att_then = f"Attendance then {i}/{x} = {(i/x)*100:.2f}%"
             return render_template('index.html',bunk=bunk,current=current,att_then=att_then)
+            
 
     except Exception as e:
         error=str(e)
